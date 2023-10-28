@@ -37,6 +37,9 @@ class VinylController extends AbstractController
         $title = str_replace('-', ' ', $genre);
         $title = u(ucwords($title));
 
-        return new Response('You are browsing the ' . $genre . ' genre!');
+        return $this->render('vinyl/browse.html.twig', [
+            'title' => $title,
+            'genre' => $genre,
+        ]);
     }
 }
