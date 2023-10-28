@@ -5,12 +5,22 @@ import { Controller } from '@hotwired/stimulus';
  *
  * Any element with a data-controller="hello" attribute will cause
  * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
+ * song-controls_controller.js -> "hello"
  *
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    connect() {
-        this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+    static values = {
+      infoUrl: String
+    }
+
+    async play(event) {
+        event.preventDefault();
+
+        const response = await fetch(this.infoUrlValue);
+        const data = await response.json();
+        const audio = new Audio(data.url);
+        console.log(data);
+        audio.play();
     }
 }
